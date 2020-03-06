@@ -80,7 +80,14 @@ class Solution {
 }
 ```
 
+# Key Points :
+1. map.containsKey() to check if we already have the node in the map
+2. Execute `queue.add(neighbor)` only if its not found in the map, otherwise it will result in infinite execution
+
 ## Some Improvements :
+In the while loop, we can remove the first `if` check, since we are only adding the node to queue before adding it to the map.
+But then, we will have to add the starting node to the map.
+
 ```java
 class Solution {
     public Node cloneGraph(Node start) {
@@ -108,10 +115,6 @@ class Solution {
     }
 }
 ```
-
-# Key Points :
-1. map.containsKey() to check if we already have the node in the map
-2. Execute `queue.add(neighbor)` only if its not found in the map, otherwise it will result in infinite execution
 
 # References :
 1. https://www.youtube.com/watch?v=vma9tCQUXk8
