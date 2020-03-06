@@ -29,7 +29,7 @@ The given node will always be the first node with val = 1. You must return the c
 4. There is no repeated edges and no self-loops in the graph.
 5. The Graph is connected and all nodes can be visited starting from the given node.
 
-## Implementation :
+## Implementation : BFS
 
 ```java
 /*
@@ -54,6 +54,34 @@ class Node {
     }
 }
 */
+
+class Solution {
+    public Node cloneGraph(Node node) {
+        if(node == null)
+            return node;
+        Map<Node,Node> map = new HashMap<>();
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(node);
+        while(!queue.isEmpty()){
+            Node currentVertex = queue.remove();
+            if(!map.containsKey(currentVertex))
+                map.put(currentVertex, new Node(currentVertex.val));
+            for(Node neighbor : currentVertex.neighbors){
+                if(!map.containsKey(neighbor)){
+                    map.put(neighbor, new Node(neighbor.val));
+                    queue.add(neighbor);
+                }
+                map.get(currentVertex).neighbors.add(map.get(neighbor));
+                
+            }
+        }
+        return map.get(node);
+    }
+}
+```
+
+## Some Improvements :
+```java
 class Solution {
     public Node cloneGraph(Node start) {
         if (start == null) {
@@ -80,6 +108,10 @@ class Solution {
     }
 }
 ```
+
+# Key Points :
+1. map.containsKey() to check if we already have the node in the map
+2. Execute `queue.add(neighbor)` only if its not found in the map, otherwise it will result in infinite execution
 
 # References :
 1. https://www.youtube.com/watch?v=vma9tCQUXk8
