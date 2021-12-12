@@ -116,7 +116,7 @@ class Solution {
 }
 ```
 
-## Another implementation :
+## Another implementation : Map and Set
 ```java
 /*
 // Definition for a Node.
