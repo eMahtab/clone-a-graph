@@ -116,6 +116,57 @@ class Solution {
 }
 ```
 
+## Another implementation :
+```java
+/*
+// Definition for a Node.
+class Node {
+    public int val;
+    public List<Node> neighbors;
+    public Node() {
+        val = 0;
+        neighbors = new ArrayList<Node>();
+    }
+    public Node(int _val) {
+        val = _val;
+        neighbors = new ArrayList<Node>();
+    }
+    public Node(int _val, ArrayList<Node> _neighbors) {
+        val = _val;
+        neighbors = _neighbors;
+    }
+}
+*/
+
+class Solution {
+    public Node cloneGraph(Node node) {
+        if(node == null)
+            return node;
+        Map<Node,Node> map = new HashMap<>();
+        Set<Node> set = new HashSet<>();
+        Queue<Node> q = new LinkedList<>();
+        q.add(node);
+        set.add(node);
+        while(!q.isEmpty()) {
+            int size = q.size();
+            for(int i = 0; i < size; i++) {
+                Node n = q.remove();
+                map.putIfAbsent(node, new Node(n.val));
+                for(Node neighbor : n.neighbors) {
+                    map.putIfAbsent(neighbor, new Node(neighbor.val));
+                    map.get(n).neighbors.add(map.get(neighbor));
+                    if(!set.contains(neighbor)) {
+                        q.add(neighbor);
+                        set.add(neighbor);
+                    }
+                }
+            }
+        }
+        return map.get(node);
+    }
+}
+```
+
 # References :
 1. https://www.youtube.com/watch?v=vma9tCQUXk8
 2. https://github.com/bephrem1/backtobackswe/blob/master/Graphs/CloneAGraph/CloneAGraph.java
