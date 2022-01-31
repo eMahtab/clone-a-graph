@@ -172,6 +172,54 @@ class Solution {
 ## General note :
 Don't add a Node more than once in the queue, and in case the same Node is added to the queue more than once, make sure you handle this correctly. By only processing it only if its not already visited. This is important, so that you don't process the same Node more than once, if you process a Node more than once it will result in duplication of edges (neighbors).
 
+### BFS
+```java
+/*
+// Definition for a Node.
+class Node {
+    public int val;
+    public List<Node> neighbors;
+    public Node() {
+        val = 0;
+        neighbors = new ArrayList<Node>();
+    }
+    public Node(int _val) {
+        val = _val;
+        neighbors = new ArrayList<Node>();
+    }
+    public Node(int _val, ArrayList<Node> _neighbors) {
+        val = _val;
+        neighbors = _neighbors;
+    }
+}
+*/
+
+class Solution {
+    public Node cloneGraph(Node node) {
+        if(node == null)
+            return node;
+        Map<Node,Node> graph = new HashMap<>();
+        Set<Node> visited = new HashSet<>();
+        Queue<Node> q = new ArrayDeque<>();
+        q.add(node);
+        while(!q.isEmpty()) {
+            Node n = q.remove();
+            if(visited.contains(n))
+                continue;
+            visited.add(n);
+            graph.putIfAbsent(n, new Node(n.val));
+            for(Node neighbor : n.neighbors) {
+                graph.putIfAbsent(neighbor, new Node(neighbor.val));
+                graph.get(n).neighbors.add(graph.get(neighbor));
+                if(!visited.contains(neighbor))
+                   q.add(neighbor);
+            }
+        }
+        return graph.get(node);
+    }
+}
+```
+
 # References :
 1. https://www.youtube.com/watch?v=vma9tCQUXk8
 2. https://github.com/bephrem1/backtobackswe/blob/master/Graphs/CloneAGraph/CloneAGraph.java
