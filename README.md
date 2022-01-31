@@ -169,6 +169,9 @@ class Solution {
 }
 ```
 
+## General note :
+Don't add a Node more than once in the queue, and in case the same Node is added to queue, make sure you handle this correctly. By only processing it only its not already visited. This is important, so that you don't process the same Node more than once, if you process a Node more than once it will result in duplication of edges (neighbors).
+
 # References :
 1. https://www.youtube.com/watch?v=vma9tCQUXk8
 2. https://github.com/bephrem1/backtobackswe/blob/master/Graphs/CloneAGraph/CloneAGraph.java
