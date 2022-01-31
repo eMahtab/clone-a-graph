@@ -29,6 +29,8 @@ The given node will always be the first node with val = 1. You must return the c
 4. There is no repeated edges and no self-loops in the graph.
 5. The Graph is connected and all nodes can be visited starting from the given node.
 
+![Clone a graph](clone-an-undirected-graph.png?raw=true)
+
 ## Implementation : BFS
 
 ```java
